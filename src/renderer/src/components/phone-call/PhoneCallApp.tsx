@@ -99,6 +99,7 @@ export function PhoneCallApp({ onHangUp }: PhoneCallAppProps): JSX.Element {
             {...phoneCallStyles.muteButton(micOn)}
             onClick={handleMicToggle}
             aria-label={micOn ? "Mute microphone" : "Unmute microphone"}
+            size="lg"
           >
             {micOn ? <FiMic size={24} /> : <FiMicOff size={24} />}
           </IconButton>
@@ -109,6 +110,7 @@ export function PhoneCallApp({ onHangUp }: PhoneCallAppProps): JSX.Element {
             {...phoneCallStyles.hangUpButton}
             onClick={handleHangUp}
             aria-label="Hang up call"
+            size="xl"
           >
             <FiPhoneOff size={28} />
           </IconButton>
@@ -119,6 +121,7 @@ export function PhoneCallApp({ onHangUp }: PhoneCallAppProps): JSX.Element {
             {...phoneCallStyles.speakerButton(speakerOn)}
             onClick={handleSpeakerToggle}
             aria-label={speakerOn ? "Turn off speaker" : "Turn on speaker"}
+            size="lg"
           >
             {speakerOn ? <FiVolume2 size={24} /> : <FiVolumeX size={24} />}
           </IconButton>

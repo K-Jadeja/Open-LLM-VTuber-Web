@@ -23,7 +23,7 @@ interface HeaderButtonsProps {
   onSettingsOpen: () => void
   onNewHistory: () => void
   setMode: (mode: ModeType) => void
-  currentMode: 'window' | 'pet'
+  currentMode: ModeType
   isElectron: boolean
 }
 
