@@ -23,7 +23,7 @@ interface HeaderButtonsProps {
   onSettingsOpen: () => void
   onNewHistory: () => void
   setMode: (mode: ModeType) => void
-  currentMode: 'window' | 'pet'
+  currentMode: ModeType
   isElectron: boolean
 }
 
@@ -60,6 +60,10 @@ const ModeMenu = memo(({ setMode, currentMode, isElectron }: {
           <Menu.RadioItem value="window" onClick={() => setMode('window')}>
             <Menu.ItemIndicator />
             Live Mode
+          </Menu.RadioItem>
+          <Menu.RadioItem value="phone" onClick={() => setMode('phone')}>
+            <Menu.ItemIndicator />
+            Phone Call
           </Menu.RadioItem>
           <Menu.RadioItem 
             value="pet" 

@@ -114,7 +114,7 @@ function WebSocketHandler({ children }: { children: React.ReactNode }) {
         setPendingModelInfo(message.model_info);
         // setModelInfo(message.model_info);
         // We don't know when the confRef in live2d-config-context will be updated, so we set a delay here for convenience
-        if (message.model_info && !message.model_info.url.startsWith("http")) {
+        if (message.model_info && message.model_info.url && !message.model_info.url.startsWith("http")) {
           const modelUrl = baseUrl + message.model_info.url;
           // eslint-disable-next-line no-param-reassign
           message.model_info.url = modelUrl;

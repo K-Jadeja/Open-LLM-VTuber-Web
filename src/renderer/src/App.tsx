@@ -29,11 +29,12 @@ import Background from "./components/canvas/background";
 import WebSocketStatus from "./components/canvas/ws-status";
 import Subtitle from "./components/canvas/subtitle";
 import { ModeProvider, useMode } from "./context/mode-context";
+import { PhoneCallApp } from "./components/phone-call/PhoneCallApp";
 
 function AppContent(): JSX.Element {
   const [showSidebar, setShowSidebar] = useState(true);
   const [isFooterCollapsed, setIsFooterCollapsed] = useState(false);
-  const { mode } = useMode();
+  const { mode, setMode } = useMode();
   const isElectron = window.api !== undefined;
   const live2dContainerRef = useRef<HTMLDivElement>(null);
 
@@ -93,16 +94,24 @@ function AppContent(): JSX.Element {
 
   return (
     <>
-      <Box
-        ref={live2dContainerRef}
-        // Apply styles conditionally based on mode
-        // Use the function to get dynamic responsive styles for window mode
-        {...(mode === "window"
-          ? getResponsiveLive2DWindowStyle(showSidebar)
-          : live2dPetStyle)}
-      >
-        <Live2D />
-      </Box>
+      {/* Phone Call Mode */}
+      {mode === "phone" && (
+        <PhoneCallApp onHangUp={() => setMode("window")} />
+      )}
+
+      {/* Live2D Character Display for window and pet modes */}
+      {mode !== "phone" && (
+        <Box
+          ref={live2dContainerRef}
+          // Apply styles conditionally based on mode
+          // Use the function to get dynamic responsive styles for window mode
+          {...(mode === "window"
+            ? getResponsiveLive2DWindowStyle(showSidebar)
+            : live2dPetStyle)}
+        >
+          <Live2D />
+        </Box>
+      )}
 
       {/* Conditional Rendering of Window UI */}
       {mode === "window" && (
