@@ -61,6 +61,10 @@ const ModeMenu = memo(({ setMode, currentMode, isElectron }: {
             <Menu.ItemIndicator />
             Live Mode
           </Menu.RadioItem>
+          <Menu.RadioItem value="phone" onClick={() => setMode('phone')}>
+            <Menu.ItemIndicator />
+            Phone Call
+          </Menu.RadioItem>
           <Menu.RadioItem 
             value="pet" 
             onClick={() => {

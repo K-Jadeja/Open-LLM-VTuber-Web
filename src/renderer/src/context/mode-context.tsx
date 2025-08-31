@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toaster } from '../components/ui/toaster';
 
-export type ModeType = 'window' | 'pet';
+export type ModeType = 'window' | 'pet' | 'phone';
 
 interface ModeContextType {
   mode: ModeType;
@@ -23,6 +23,12 @@ export const ModeProvider: React.FC<{ children: React.ReactNode }> = ({ children
         type: "info",
         duration: 2000,
       });
+      return;
+    }
+
+    // Phone mode can work in both web and desktop
+    if (newMode === 'phone') {
+      setModeState(newMode);
       return;
     }
 
