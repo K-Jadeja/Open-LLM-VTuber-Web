@@ -1,14 +1,19 @@
 const WebSocket = require('ws');
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors());
+
+// Serve Live2D models from the backend directory
+app.use('/live2d-models', express.static(path.join(__dirname, 'backend', 'live2d-models')));
 
 // Create WebSocket server on port 12393 (same as backend)
 const wss = new WebSocket.Server({ port: 12393, path: '/client-ws' });
 
 console.log('Mock backend started on ws://127.0.0.1:12393/client-ws');
+console.log('HTTP server will serve Live2D models on http://127.0.0.1:12394/live2d-models/');
 
 wss.on('connection', function connection(ws) {
   console.log('Frontend connected to mock backend');
@@ -18,10 +23,20 @@ wss.on('connection', function connection(ws) {
     ws.send(JSON.stringify({
       type: 'set-model-and-conf',
       model_info: {
-        model_name: 'Demo Model',
-        model_url: 'https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json'
+        model_name: 'Mao Pro',
+        url: 'http://127.0.0.1:12394/live2d-models/mao_pro/runtime/mao_pro.model3.json',
+        kScale: 0.5,
+        initialXshift: 0,
+        initialYshift: 0,
+        idleMotionGroupName: 'idle',
+        defaultEmotion: 0,
+        emotionMap: {},
+        pointerInteractive: true,
+        scrollToResize: true,
+        initialScale: 1.0
       },
-      conf_name: 'default'
+      conf_name: 'default',
+      conf_uid: 'demo-config-123'
     }));
   }, 1000);
 
